@@ -6,8 +6,10 @@ var a,block8,block9,block10,block11,block12,block13,block14,block15,block16,stan
 var circles=[];
 var ground,stand1,polygon,slingshot;
 var score =0;
+var bg = "black" //Created a global variable
+
 function setup() {
-  getbackgroundImage();
+  
   createCanvas(800,800);
   stroke(255)
   engine=Engine.create();
@@ -50,12 +52,15 @@ polygon=new Polygon(20,600,40);
   slingshot=new SlingShot(polygon.polygon,{x:100,y:200});
    block25=new Box(300,650,30,40);
   stand2=new Ground(390,262,240, 10);
+  getbackgroundImage(); //call the getbackgroundImage()
 }
 //Engine.run(engine);
 function draw() {
   //camera.zoom=camera.zoom+1
   Engine.update(engine);
-  
+ 
+  console.log(bg) 
+  background(bg); //update the bg variable in background()
    
   //console.log(score)
   fill("yellow");
@@ -151,9 +156,10 @@ async function getbackgroundImage(){
   var daytime=responseJS.datetime;
   var hour=daytime.slice(11,13);
   if(hour>=06&&hour<=19){
-background("blue");
+    bg = "blue"
   }
   else{
-    background("black")
+    bg = "red"
   }
+ return bg;
 }
